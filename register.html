@@ -1,9 +1,70 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>GlobalCart Exchange (GCX)</title>
+  <meta charset="UTF-8">
+  <title>Register | GCX</title>
+  <style>
+    body {
+      background-color: #0f0f0f;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: Arial;
+    }
+    .box {
+      background-color: #1e1e1e;
+      padding: 20px;
+      border-radius: 8px;
+      width: 300px;
+    }
+    input, button {
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+    }
+    button {
+      background-color: #fcd535;
+      color: black;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-<!-- Register form -->
+  <div class="box">
+    <h2>Register</h2>
+    <input type="email" id="regEmail" placeholder="Email" />
+    <input type="password" id="regPass" placeholder="Password" />
+    <button onclick="register()">Create Account</button>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyD3uI1rOtgGDUIisnzeReqAlMbgKVdEjTM",
+      authDomain: "globalcartexchange-gcx.firebaseapp.com",
+      projectId: "globalcartexchange-gcx",
+      storageBucket: "globalcartexchange-gcx.firebasestorage.app",
+      messagingSenderId: "609948884795",
+      appId: "1:609948884795:web:392e138bc9083804b3e11e"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    window.register = () => {
+      const email = document.getElementById("regEmail").value;
+      const password = document.getElementById("regPass").value;
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(() => alert("Registration successful!"))
+        .catch(error => alert("Error: " + error.message));
+    };
+  </script>
 </body>
 </html>
